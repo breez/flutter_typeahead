@@ -888,6 +888,14 @@ class _TypeAheadFieldState<T> extends State<TypeAheadField<T>>
   }
 
   @override
+  void didUpdateWidget(TypeAheadField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!this._effectiveFocusNode.hasListeners) {
+      this._effectiveFocusNode.addListener(_focusNodeListener);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CompositedTransformTarget(
       link: this._layerLink,
