@@ -902,10 +902,11 @@ class _TypeAheadFieldState<T> extends State<TypeAheadField<T>>
   }
 
   @override
-  void didUpdateWidget(TypeAheadField oldWidget) {
+  void didUpdateWidget(TypeAheadField<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (!this._effectiveFocusNode.hasListeners) {
-      this._effectiveFocusNode.addListener(_focusNodeListener);
+    // ignore: invalid_use_of_protected_member
+    if (!this._effectiveFocusNode!.hasListeners) {
+      this._effectiveFocusNode!.addListener(_focusNodeListener);
     }
   }
 
