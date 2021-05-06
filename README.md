@@ -21,6 +21,8 @@ the loading bar, the animation, the debounce duration, etc.
 ## Installation
 See the [installation instructions on pub](https://pub.dartlang.org/packages/flutter_typeahead#-installing-tab-).
 
+Note: As for Typeahead 3.X this package is based on Dart 2.12 (null-safety). You may also want to explore the new built in Flutter 2 widgets that have similar behavior. 
+
 ## Usage examples
 You can import the package with:
 ```dart
@@ -214,6 +216,11 @@ etc.
 TypeAhead provides default configurations for the suggestions box. You can,
 however, override most of them. This is done by passing a `SuggestionsBoxDecoration` 
 to the `suggestionsBoxDecoration` property.
+
+Use the `offsetX` property in `SuggestionsBoxDecoration` to shift the suggestions box along the x-axis. 
+You may also pass BoxConstraints to `constraints` in `SuggestionsBoxDecoration` to adjust the width 
+and height of the suggestions box. Using the two together will allow the suggestions box to be placed 
+almost anywhere.
 
 #### Customizing the loader, the error and the "no items found" message
 You can use the `loadingBuilder`, `errorBuilder` and `noItemsFoundBuilder` to
