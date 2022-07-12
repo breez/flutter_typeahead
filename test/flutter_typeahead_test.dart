@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
-import '../lib/cupertino_flutter_typeahead.dart';
-
 class TestPage extends StatefulWidget {
-  TestPage({Key? key}) : super(key: key);
+  final int minCharsForSuggestions;
+  TestPage({Key? key, this.minCharsForSuggestions: 0}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => TestPageState();
@@ -42,25 +40,27 @@ class TestPageState extends State<TestPage> {
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             children: [
               TypeAheadFormField<String>(
-                  textFieldConfiguration: TextFieldConfiguration(
-                      autofocus: true,
-                      inputFormatters: [LengthLimitingTextInputFormatter(50)],
-                      controller: _controller,
-                      decoration: InputDecoration(labelText: 'Type Ahead')),
-                  suggestionsCallback: (pattern) {
-                    if (pattern.length > 0)
-                      return [pattern + 'aaa', pattern + 'bbb'];
-                    else
-                      return [];
-                  },
-                  noItemsFoundBuilder: (context) => const SizedBox(),
-                  itemBuilder: (context, String suggestion) {
-                    return ListTile(
-                      title: Text(suggestion),
-                    );
-                  },
-                  onSuggestionSelected: (String suggestion) =>
-                      this._controller.text = suggestion),
+                textFieldConfiguration: TextFieldConfiguration(
+                    autofocus: true,
+                    inputFormatters: [LengthLimitingTextInputFormatter(50)],
+                    controller: _controller,
+                    decoration: InputDecoration(labelText: 'Type Ahead')),
+                suggestionsCallback: (pattern) {
+                  if (pattern.length > 0)
+                    return [pattern + 'aaa', pattern + 'bbb'];
+                  else
+                    return [];
+                },
+                noItemsFoundBuilder: (context) => const SizedBox(),
+                itemBuilder: (context, String suggestion) {
+                  return ListTile(
+                    title: Text(suggestion),
+                  );
+                },
+                onSuggestionSelected: (String suggestion) =>
+                    this._controller.text = suggestion,
+                minCharsForSuggestions: widget.minCharsForSuggestions,
+              ),
             ],
           ),
         ));
@@ -68,7 +68,9 @@ class TestPageState extends State<TestPage> {
 }
 
 class CupertinoTestPage extends StatefulWidget {
-  CupertinoTestPage({Key? key}) : super(key: key);
+  final int minCharsForSuggestions;
+  CupertinoTestPage({Key? key, this.minCharsForSuggestions: 0})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => CupertinoTestPageState();
@@ -119,7 +121,8 @@ class CupertinoTestPageState extends State<CupertinoTestPage> {
                     return Text(suggestion);
                   },
                   onSuggestionSelected: (String suggestion) =>
-                      this._controller.text = suggestion),
+                      this._controller.text = suggestion,
+                  minCharsForSuggestions: widget.minCharsForSuggestions),
             ],
           ),
         ));
@@ -151,6 +154,23 @@ void main() {
       expect(find.text("test2aaa"), findsOneWidget);
       expect(find.text("test2bbb"), findsOneWidget);
     });
+
+    testWidgets('min chars for suggestions', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(
+          home: TestPage(
+        minCharsForSuggestions: 4,
+      )));
+      await tester.pumpAndSettle();
+
+      tester.testTextInput.enterText("333");
+      await tester.pumpAndSettle(Duration(milliseconds: 2000));
+      expect(find.text("333aaa"), findsNothing);
+      expect(find.text("333bbb"), findsNothing);
+      tester.testTextInput.enterText("4444");
+      await tester.pumpAndSettle(Duration(milliseconds: 2000));
+      expect(find.text("4444aaa"), findsOneWidget);
+      expect(find.text("4444bbb"), findsOneWidget);
+    });
     // testWidgets('entering text works', (WidgetTester tester) async {
     //   await tester.pumpWidget(MaterialApp(home: TestPage()));
     //   await tester.pumpAndSettle();
@@ -179,6 +199,23 @@ void main() {
       expect(find.text("testbbb"), findsNothing);
       expect(find.text("test2aaa"), findsOneWidget);
       expect(find.text("test2bbb"), findsOneWidget);
+    });
+
+    testWidgets('min chars for suggestions', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(
+          home: TestPage(
+        minCharsForSuggestions: 4,
+      )));
+      await tester.pumpAndSettle();
+
+      tester.testTextInput.enterText("333");
+      await tester.pumpAndSettle(Duration(milliseconds: 2000));
+      expect(find.text("333aaa"), findsNothing);
+      expect(find.text("333bbb"), findsNothing);
+      tester.testTextInput.enterText("4444");
+      await tester.pumpAndSettle(Duration(milliseconds: 2000));
+      expect(find.text("4444aaa"), findsOneWidget);
+      expect(find.text("4444bbb"), findsOneWidget);
     });
   });
 }
