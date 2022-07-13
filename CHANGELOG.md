@@ -1,3 +1,51 @@
+## 4.0.0 - 15-May-2022
+
+-- PR #395 - Fix Flutter 3.0 warnings
+
+## 3.2.7 - 15-May-2022
+
+-- REVERT PR #395 - Fix Flutter 3.0 warnings
+
+## 3.2.6 - 15-May-2022
+
+-- PR #393 - Hide suggestion on close issue fix
+-- PR #395 - Fix Flutter 3.0 warnings
+
+## 3.2.5 - 18-Apr-2022
+
+-- PR #383 - Fix maxLengthEnforced deprecation
+
+## 3.2.4 - 9-Dec-2021
+
+-- PR #360 - Resize before opening box (fixes issue 220)
+
+## 3.2.3 - 21-Nov-2021
+
+-- PR #354 - Make maxLines nullable
+-- PR #349 - Add option for min number of chars before suggestionsCallback is called
+-- PR #347 - Un private some variables
+-- PR #347 - Fix deprecated info's in example
+-- PR #344 - Add textAlignVertical support, fixes #231
+
+## 3.2.2 - 20-Aug-2021
+
+-- PR #333 - support Windows and MacOS by making keyboard_visibility optional
+
+## 3.2.1 - 10-Sept-2021
+
+-- PR #327 - Added Scrollcontroler as optional parameter
+-- PR #335 - Fix ErrorBuilder Widget display
+-- PR #339 - Strong mode and type fixes
+
+## 3.2.0 - 9-Jul-2021
+
+-- PR #326 - file structure reorganisation
+-- PR #325 - Fix Scrollbar ScrollController
+
+## 3.1.3 - 7-May-2021
+
+-- PR #308 - Allow suggestionsCallback to return null
+
 ## 3.1.2 - 1-May-2021
 
 -- PR #303 - Guard against missing size in \_adjustMaxHeightAndOrientation
