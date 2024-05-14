@@ -251,40 +251,40 @@ class TypeAheadFormField<T> extends FormField<String> {
   TypeAheadFormField(
       {Key? key,
       String? initialValue,
-      bool getImmediateSuggestions: false,
+      bool getImmediateSuggestions = false,
       @Deprecated('Use autovalidateMode parameter which provides more specific '
           'behavior related to auto validation. '
           'This feature was deprecated after Flutter v1.19.0.')
-          bool autovalidate: false,
-      bool enabled: true,
-      AutovalidateMode autovalidateMode: AutovalidateMode.disabled,
+          bool autovalidate = false,
+      bool enabled = true,
+      AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
       FormFieldSetter<String>? onSaved,
       FormFieldValidator<String>? validator,
       ErrorBuilder? errorBuilder,
       WidgetBuilder? noItemsFoundBuilder,
       WidgetBuilder? loadingBuilder,
-      Duration debounceDuration: const Duration(milliseconds: 300),
-      SuggestionsBoxDecoration suggestionsBoxDecoration:
+      Duration debounceDuration = const Duration(milliseconds: 300),
+      SuggestionsBoxDecoration suggestionsBoxDecoration =
           const SuggestionsBoxDecoration(),
       SuggestionsBoxController? suggestionsBoxController,
       required SuggestionSelectionCallback<T> onSuggestionSelected,
       required ItemBuilder<T> itemBuilder,
       required SuggestionsCallback<T> suggestionsCallback,
-      double suggestionsBoxVerticalOffset: 5.0,
-      this.textFieldConfiguration: const TextFieldConfiguration(),
+      double suggestionsBoxVerticalOffset = 5.0,
+      this.textFieldConfiguration = const TextFieldConfiguration(),
       AnimationTransitionBuilder? transitionBuilder,
-      Duration animationDuration: const Duration(milliseconds: 500),
-      double animationStart: 0.25,
-      AxisDirection direction: AxisDirection.down,
-      bool hideOnLoading: false,
-      bool hideOnEmpty: false,
-      bool hideOnError: false,
-      bool hideSuggestionsOnKeyboardHide: true,
-      bool keepSuggestionsOnLoading: true,
-      bool keepSuggestionsOnSuggestionSelected: false,
-      bool autoFlipDirection: false,
-      bool hideKeyboard: false,
-      int minCharsForSuggestions: 0})
+      Duration animationDuration = const Duration(milliseconds: 500),
+      double animationStart = 0.25,
+      AxisDirection direction = AxisDirection.down,
+      bool hideOnLoading = false,
+      bool hideOnEmpty = false,
+      bool hideOnError = false,
+      bool hideSuggestionsOnKeyboardHide = true,
+      bool keepSuggestionsOnLoading = true,
+      bool keepSuggestionsOnSuggestionSelected = false,
+      bool autoFlipDirection = false,
+      bool hideKeyboard = false,
+      int minCharsForSuggestions = 0})
       : assert(
             initialValue == null || textFieldConfiguration.controller == null),
         assert(minCharsForSuggestions >= 0),
@@ -682,29 +682,29 @@ class TypeAheadField<T> extends StatefulWidget {
       required this.suggestionsCallback,
       required this.itemBuilder,
       required this.onSuggestionSelected,
-      this.textFieldConfiguration: const TextFieldConfiguration(),
-      this.suggestionsBoxDecoration: const SuggestionsBoxDecoration(),
-      this.debounceDuration: const Duration(milliseconds: 300),
+      this.textFieldConfiguration = const TextFieldConfiguration(),
+      this.suggestionsBoxDecoration = const SuggestionsBoxDecoration(),
+      this.debounceDuration = const Duration(milliseconds: 300),
       this.suggestionsBoxController,
       this.scrollController,
       this.loadingBuilder,
       this.noItemsFoundBuilder,
       this.errorBuilder,
       this.transitionBuilder,
-      this.animationStart: 0.25,
-      this.animationDuration: const Duration(milliseconds: 500),
-      this.getImmediateSuggestions: false,
-      this.suggestionsBoxVerticalOffset: 5.0,
-      this.direction: AxisDirection.down,
-      this.hideOnLoading: false,
-      this.hideOnEmpty: false,
-      this.hideOnError: false,
-      this.hideSuggestionsOnKeyboardHide: true,
-      this.keepSuggestionsOnLoading: true,
-      this.keepSuggestionsOnSuggestionSelected: false,
-      this.autoFlipDirection: false,
-      this.hideKeyboard: false,
-      this.minCharsForSuggestions: 0})
+      this.animationStart = 0.25,
+      this.animationDuration = const Duration(milliseconds: 500),
+      this.getImmediateSuggestions = false,
+      this.suggestionsBoxVerticalOffset = 5.0,
+      this.direction = AxisDirection.down,
+      this.hideOnLoading = false,
+      this.hideOnEmpty = false,
+      this.hideOnError = false,
+      this.hideSuggestionsOnKeyboardHide = true,
+      this.keepSuggestionsOnLoading = true,
+      this.keepSuggestionsOnSuggestionSelected = false,
+      this.autoFlipDirection = false,
+      this.hideKeyboard = false,
+      this.minCharsForSuggestions = 0})
       : assert(animationStart >= 0.0 && animationStart <= 1.0),
         assert(
             direction == AxisDirection.down || direction == AxisDirection.up),
@@ -818,14 +818,12 @@ class _TypeAheadFieldState<T> extends State<TypeAheadField<T>>
   void didChangeDependencies() {
     super.didChangeDependencies();
     ScrollableState? scrollableState = Scrollable.of(context);
-    if (scrollableState != null) {
-      // The TypeAheadField is inside a scrollable widget
-      _scrollPosition = scrollableState.position;
+    // The TypeAheadField is inside a scrollable widget
+    _scrollPosition = scrollableState.position;
 
-      _scrollPosition!.removeListener(_scrollResizeListener);
-      _scrollPosition!.isScrollingNotifier.addListener(_scrollResizeListener);
+    _scrollPosition!.removeListener(_scrollResizeListener);
+    _scrollPosition!.isScrollingNotifier.addListener(_scrollResizeListener);
     }
-  }
 
   void _scrollResizeListener() {
     bool isScrolling = _scrollPosition!.isScrollingNotifier.value;
@@ -989,7 +987,7 @@ class _SuggestionsList<T> extends StatefulWidget {
   _SuggestionsList({
     required this.suggestionsBox,
     this.controller,
-    this.getImmediateSuggestions: false,
+    this.getImmediateSuggestions = false,
     this.onSuggestionSelected,
     this.suggestionsCallback,
     this.itemBuilder,
@@ -1251,7 +1249,7 @@ class _SuggestionsListState<T> extends State<_SuggestionsList<T>>
             padding: const EdgeInsets.all(8.0),
             child: Text(
               'Error: ${this._error}',
-              style: TextStyle(color: Theme.of(context).errorColor),
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
           );
   }
@@ -1345,15 +1343,15 @@ class SuggestionsBoxDecoration {
 
   /// Creates a SuggestionsBoxDecoration
   const SuggestionsBoxDecoration(
-      {this.elevation: 4.0,
+      {this.elevation = 4.0,
       this.color,
       this.shape,
-      this.hasScrollbar: true,
+      this.hasScrollbar = true,
       this.borderRadius,
-      this.shadowColor: const Color(0xFF000000),
+      this.shadowColor = const Color(0xFF000000),
       this.constraints,
-      this.clipBehavior: Clip.none,
-      this.offsetX: 0.0});
+      this.clipBehavior = Clip.none,
+      this.offsetX = 0.0});
 }
 
 /// Supply an instance of this class to the [TypeAhead.textFieldConfiguration]
@@ -1527,36 +1525,36 @@ class TextFieldConfiguration {
 
   /// Creates a TextFieldConfiguration
   const TextFieldConfiguration({
-    this.decoration: const InputDecoration(),
+    this.decoration = const InputDecoration(),
     this.style,
     this.controller,
     this.onChanged,
     this.onSubmitted,
-    this.obscureText: false,
+    this.obscureText = false,
     this.maxLengthEnforcement,
     this.maxLength,
-    this.maxLines: 1,
+    this.maxLines = 1,
     this.minLines,
     this.textAlignVertical,
-    this.autocorrect: true,
+    this.autocorrect = true,
     this.inputFormatters,
-    this.autofocus: false,
-    this.keyboardType: TextInputType.text,
-    this.enabled: true,
-    this.enableSuggestions: true,
-    this.textAlign: TextAlign.start,
+    this.autofocus = false,
+    this.keyboardType = TextInputType.text,
+    this.enabled = true,
+    this.enableSuggestions = true,
+    this.textAlign = TextAlign.start,
     this.focusNode,
     this.cursorColor,
     this.cursorRadius,
     this.textInputAction,
-    this.textCapitalization: TextCapitalization.none,
-    this.cursorWidth: 2.0,
+    this.textCapitalization = TextCapitalization.none,
+    this.cursorWidth = 2.0,
     this.keyboardAppearance,
     this.onEditingComplete,
     this.onTap,
     this.textDirection,
-    this.scrollPadding: const EdgeInsets.all(20.0),
-    this.enableInteractiveSelection: true,
+    this.scrollPadding = const EdgeInsets.all(20.0),
+    this.enableInteractiveSelection = true,
   });
 
   /// Copies the [TextFieldConfiguration] and only changes the specified
@@ -1653,7 +1651,7 @@ class _SuggestionsBox {
     if (this.isOpened) return;
     assert(this._overlayEntry != null);
     resize();
-    Overlay.of(context)!.insert(this._overlayEntry!);
+    Overlay.of(context).insert(this._overlayEntry!);
     this.isOpened = true;
   }
 

@@ -66,39 +66,39 @@ class CupertinoTypeAheadFormField<T> extends FormField<String> {
   CupertinoTypeAheadFormField(
       {Key? key,
       String? initialValue,
-      bool getImmediateSuggestions: false,
+      bool getImmediateSuggestions = false,
       @Deprecated('Use autoValidateMode parameter which provides more specific '
           'behavior related to auto validation. '
           'This feature was deprecated after Flutter v1.19.0.')
-          bool autovalidate: false,
-      bool enabled: true,
+          bool autovalidate = false,
+      bool enabled = true,
       AutovalidateMode? autovalidateMode,
       FormFieldSetter<String>? onSaved,
       FormFieldValidator<String>? validator,
       ErrorBuilder? errorBuilder,
       WidgetBuilder? noItemsFoundBuilder,
       WidgetBuilder? loadingBuilder,
-      Duration debounceDuration: const Duration(milliseconds: 300),
-      CupertinoSuggestionsBoxDecoration suggestionsBoxDecoration:
+      Duration debounceDuration = const Duration(milliseconds: 300),
+      CupertinoSuggestionsBoxDecoration suggestionsBoxDecoration =
           const CupertinoSuggestionsBoxDecoration(),
       CupertinoSuggestionsBoxController? suggestionsBoxController,
       required SuggestionSelectionCallback<T> onSuggestionSelected,
       required ItemBuilder<T> itemBuilder,
       required SuggestionsCallback<T> suggestionsCallback,
-      double suggestionsBoxVerticalOffset: 5.0,
-      this.textFieldConfiguration: const CupertinoTextFieldConfiguration(),
+      double suggestionsBoxVerticalOffset = 5.0,
+      this.textFieldConfiguration = const CupertinoTextFieldConfiguration(),
       AnimationTransitionBuilder? transitionBuilder,
-      Duration animationDuration: const Duration(milliseconds: 500),
-      double animationStart: 0.25,
-      AxisDirection direction: AxisDirection.down,
-      bool hideOnLoading: false,
-      bool hideOnEmpty: false,
-      bool hideOnError: false,
-      bool hideSuggestionsOnKeyboardHide: true,
-      bool keepSuggestionsOnLoading: true,
-      bool keepSuggestionsOnSuggestionSelected: false,
-      bool autoFlipDirection: false,
-      int minCharsForSuggestions: 0})
+      Duration animationDuration = const Duration(milliseconds: 500),
+      double animationStart = 0.25,
+      AxisDirection direction = AxisDirection.down,
+      bool hideOnLoading = false,
+      bool hideOnEmpty = false,
+      bool hideOnError = false,
+      bool hideSuggestionsOnKeyboardHide = true,
+      bool keepSuggestionsOnLoading = true,
+      bool keepSuggestionsOnSuggestionSelected = false,
+      bool autoFlipDirection = false,
+      int minCharsForSuggestions = 0})
       : assert(
             initialValue == null || textFieldConfiguration.controller == null),
         assert(minCharsForSuggestions >= 0),
@@ -487,27 +487,27 @@ class CupertinoTypeAheadField<T> extends StatefulWidget {
       required this.suggestionsCallback,
       required this.itemBuilder,
       required this.onSuggestionSelected,
-      this.textFieldConfiguration: const CupertinoTextFieldConfiguration(),
-      this.suggestionsBoxDecoration: const CupertinoSuggestionsBoxDecoration(),
-      this.debounceDuration: const Duration(milliseconds: 300),
+      this.textFieldConfiguration = const CupertinoTextFieldConfiguration(),
+      this.suggestionsBoxDecoration = const CupertinoSuggestionsBoxDecoration(),
+      this.debounceDuration = const Duration(milliseconds: 300),
       this.suggestionsBoxController,
       this.loadingBuilder,
       this.noItemsFoundBuilder,
       this.errorBuilder,
       this.transitionBuilder,
-      this.animationStart: 0.25,
-      this.animationDuration: const Duration(milliseconds: 500),
-      this.getImmediateSuggestions: false,
-      this.suggestionsBoxVerticalOffset: 5.0,
-      this.direction: AxisDirection.down,
-      this.hideOnLoading: false,
-      this.hideOnEmpty: false,
-      this.hideOnError: false,
-      this.hideSuggestionsOnKeyboardHide: true,
-      this.keepSuggestionsOnLoading: true,
-      this.keepSuggestionsOnSuggestionSelected: false,
-      this.autoFlipDirection: false,
-      this.minCharsForSuggestions: 0})
+      this.animationStart = 0.25,
+      this.animationDuration = const Duration(milliseconds: 500),
+      this.getImmediateSuggestions = false,
+      this.suggestionsBoxVerticalOffset = 5.0,
+      this.direction = AxisDirection.down,
+      this.hideOnLoading = false,
+      this.hideOnEmpty = false,
+      this.hideOnError = false,
+      this.hideSuggestionsOnKeyboardHide = true,
+      this.keepSuggestionsOnLoading = true,
+      this.keepSuggestionsOnSuggestionSelected = false,
+      this.autoFlipDirection = false,
+      this.minCharsForSuggestions = 0})
       : assert(animationStart >= 0.0 && animationStart <= 1.0),
         assert(
             direction == AxisDirection.down || direction == AxisDirection.up),
@@ -620,14 +620,12 @@ class _CupertinoTypeAheadFieldState<T> extends State<CupertinoTypeAheadField<T>>
   void didChangeDependencies() {
     super.didChangeDependencies();
     ScrollableState? scrollableState = Scrollable.of(context);
-    if (scrollableState != null) {
-      // The TypeAheadField is inside a scrollable widget
-      _scrollPosition = scrollableState.position;
+    // The TypeAheadField is inside a scrollable widget
+    _scrollPosition = scrollableState.position;
 
-      _scrollPosition!.removeListener(_scrollResizeListener);
-      _scrollPosition!.isScrollingNotifier.addListener(_scrollResizeListener);
+    _scrollPosition!.removeListener(_scrollResizeListener);
+    _scrollPosition!.isScrollingNotifier.addListener(_scrollResizeListener);
     }
-  }
 
   void _scrollResizeListener() {
     bool isScrolling = _scrollPosition!.isScrollingNotifier.value;
@@ -787,7 +785,7 @@ class _SuggestionsList<T> extends StatefulWidget {
   _SuggestionsList({
     required this.suggestionsBox,
     this.controller,
-    this.getImmediateSuggestions: false,
+    this.getImmediateSuggestions = false,
     this.onSuggestionSelected,
     this.suggestionsCallback,
     this.itemBuilder,
@@ -1143,12 +1141,12 @@ class CupertinoSuggestionsBoxDecoration {
 
   /// Creates a [CupertinoSuggestionsBoxDecoration]
   const CupertinoSuggestionsBoxDecoration(
-      {this.hasScrollbar: true,
+      {this.hasScrollbar = true,
       this.constraints,
       this.color,
       this.border,
       this.borderRadius,
-      this.offsetX: 0.0});
+      this.offsetX = 0.0});
 }
 
 /// Supply an instance of this class to the [TypeAhead.textFieldConfiguration]
@@ -1220,8 +1218,8 @@ class CupertinoTextFieldConfiguration {
     this.onTap,
     this.onSubmitted,
     this.inputFormatters,
-    this.enabled: true,
-    this.enableSuggestions: true,
+    this.enabled = true,
+    this.enableSuggestions = true,
     this.cursorWidth = 2.0,
     this.cursorRadius = const Radius.circular(2.0),
     this.cursorColor,
@@ -1334,7 +1332,7 @@ class _CupertinoSuggestionsBox {
     if (this.isOpened) return;
     assert(this._overlayEntry != null);
     resize();
-    Overlay.of(context)!.insert(this._overlayEntry!);
+    Overlay.of(context).insert(this._overlayEntry!);
     this.isOpened = true;
   }
 

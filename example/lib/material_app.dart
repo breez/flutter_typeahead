@@ -158,11 +158,11 @@ class ProductPage extends StatelessWidget {
           children: [
             Text(
               this.product['name']!,
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
             Text(
               this.product['price']! + ' USD',
-              style: Theme.of(context).textTheme.subtitle1,
+              style: Theme.of(context).textTheme.titleMedium,
             )
           ],
         ),
