@@ -7,8 +7,11 @@ homepage: https://github.com/AbdulRahmanAlHamali/flutter_typeahead
 dependencies:
   flutter:
     sdk: flutter
-  flutter_keyboard_visibility: ^5.3.0
-
+  flutter_keyboard_visibility:
+    git:
+      url: https://github.com/Crucialjun/flutter_keyboard_visibility
+      path: flutter_keyboard_visibility
+      ref: 63da8c50a5be71a2c06e988cd1993a89b9873a1c
 dev_dependencies:
   flutter_test:
     sdk: flutter
